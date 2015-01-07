@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
+
+    <!--Production Server-->
+    <application>idd-backend</application>
+    <module>push-vm</module>
+    <!--Deploy convention! Be careful: Not following this simple rule affects analytics data pipeline-->
+    <!--Use version v1,v2,v3 only & rotate if necessary & check for the default version on GAE admin console -->
+    <version>test-oom</version>
+
+    <threadsafe>true</threadsafe>
+    <sessions-enabled>false</sessions-enabled>
+    <precompilation-enabled>false</precompilation-enabled>
+    <warmup-requests-enabled>true</warmup-requests-enabled>
+
+    <manual-scaling>
+        <instances>1</instances>
+    </manual-scaling>
+    <!--<automatic-scaling>-->
+    <!--<min-num-instances>1</min-num-instances>-->
+    <!--<max-num-instances>2</max-num-instances>-->
+    <!--<cool-down-period-sec>60</cool-down-period-sec>-->
+    <!--<cpu-utilization>-->
+    <!--<target-utilization>0.7</target-utilization>-->
+    <!--</cpu-utilization>-->
+    <!--</automatic-scaling>-->
+
+    <vm>true</vm>
+    <resources>
+        <cpu>.5</cpu>
+        <memory-gb>1.3</memory-gb>
+    </resources>
+
+    <health-check>
+        <enable-health-check>true</enable-health-check>
+        <check-interval-sec>2</check-interval-sec>
+        <timeout-sec>20</timeout-sec>
+        <healthy-threshold>3</healthy-threshold>
+        <unhealthy-threshold>3</unhealthy-threshold>
+        <restart-threshold>10</restart-threshold>
+    </health-check>
+
+    <network>
+        <forwarded-port>1099:1099</forwarded-port>
+    </network>
+
+    <env-variables>
+        <env-var name="DBG_ENABLE" value="1"/>
+        <env-var name="DBG_PORT" value="5005"/>
+    </env-variables>
+
+</appengine-web-app>

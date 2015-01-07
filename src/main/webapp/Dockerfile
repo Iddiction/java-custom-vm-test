@@ -1,0 +1,2 @@
+FROM vmprofiling
+ADD . /app
